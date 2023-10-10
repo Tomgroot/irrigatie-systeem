@@ -3,12 +3,12 @@
 int humidityPin[] = {A0, A2};
 int pumpPin[] = {10, 9};
 // In approx 31 pumps, it moves 15cl of water. 6 times a day * 7 = 42 pumps is approx 20cl
-int pumpsPerDay[] = {0, 0};
+int pumpsPerDay[] = {4, 4};
 float prevPumpedM[] = {0, 0};
 float prevDayM = 0;
 float elapsedM = 0;
 float humidity[] = {0.0, 0.0};
-int maxPumpsPerDay[] = {5, 5};
+int maxPumpsPerDay[] = {4, 4};
 int maxHumidity[] = {320, 320};
 int nrOfPlants = 2;
 
@@ -31,6 +31,8 @@ void loop() {
   Serial.print(elapsedM);
   Serial.print(" m, Day start time: ");
   Serial.print(prevDayM);
+  Serial.print(" m, Elapsed since day: ");
+  Serial.print(elapsedM - prevDayM);
   Serial.print(" m, Nr plants ");
   Serial.println(nrOfPlants);
   
@@ -41,8 +43,9 @@ void loop() {
   }
   
 
-  if (elapsedM - prevDayM > 24 * 60) {
+  if (elapsedM - prevDayM >= 24 * 60) {
     Serial.println("Day elapsed!");
+    prevDayM = elapsedM;
     for (int i = 0; i < nrOfPlants; i++) {
       pumpsPerDay[i] = 0;
     }
