@@ -3,13 +3,13 @@
 int humidityPin[] = {A0, A2};
 int pumpPin[] = {10, 9};
 // In approx 31 pumps, it moves 15cl of water. 6 times a day * 7 = 42 pumps is approx 20cl
-int pumpsPerDay[] = {4, 4};
+int pumpsPerDay[] = {5, 5};
 float prevPumpedM[] = {0, 0};
 float prevDayM = 0;
 float elapsedM = 0;
 float humidity[] = {0.0, 0.0};
-int maxPumpsPerDay[] = {4, 4};
-int maxHumidity[] = {320, 320};
+int maxPumpsPerDay[] = {5, 5};
+int maxHumidity[] = {310, 310};
 int nrOfPlants = 2;
 
 void setup() {
@@ -75,6 +75,7 @@ void showPumpsPerDayOnLed(int id) {
   digitalWrite(LED_PIN, HIGH);
   delay(2000);
   digitalWrite(LED_PIN, LOW);
+  delay(200);
   for (int i = 0; i < pumpsPerDay[id]; i++) {
     digitalWrite(LED_PIN, HIGH);
     delay(200);
